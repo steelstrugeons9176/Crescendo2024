@@ -13,7 +13,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.WPIUtilJNI;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import  com.kauailabs.navx.frc.AHRS;
 import frc.robot.Constants.DriveConstants;
@@ -75,8 +74,8 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // Update the odometry in the periodic block
 
-    SmartDashboard.putNumber("Gyro Current Angle", -m_gyro.getAngle());
-    SmartDashboard.putNumber("Pitch", getPitch());
+    //SmartDashboard.putNumber("Gyro Current Angle", -m_gyro.getAngle());
+    //SmartDashboard.putNumber("Pitch", getPitch());
     m_odometry.update(
         Rotation2d.fromDegrees(-m_gyro.getAngle()),
         new SwerveModulePosition[] {

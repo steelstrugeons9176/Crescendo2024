@@ -46,15 +46,15 @@ public final class Constants {
     public static final double kBackRightChassisAngularOffset = Math.PI / 2;
 
     // SPARK MAX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 30;
-    public static final int kRearLeftDrivingCanId = 40;
-    public static final int kRearRightDrivingCanId = 50;
-    public static final int kFrontRightDrivingCanId = 60;
+    public static final int kFrontLeftDrivingCanId = 20;
+    public static final int kRearLeftDrivingCanId = 50;
+    public static final int kRearRightDrivingCanId = 40;
+    public static final int kFrontRightDrivingCanId = 30;
 
-    public static final int kFrontLeftTurningCanId = 31;
-    public static final int kRearLeftTurningCanId = 41;
-    public static final int kRearRightTurningCanId = 51;
-    public static final int kFrontRightTurningCanId = 61;
+    public static final int kFrontLeftTurningCanId = 21;
+    public static final int kRearLeftTurningCanId = 51;
+    public static final int kRearRightTurningCanId = 41;
+    public static final int kFrontRightTurningCanId = 31;
     
 
     public static final boolean kGyroReversed = true;
@@ -104,6 +104,7 @@ public final class Constants {
     public static final double kTurningMaxOutput = 1;
 
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
+    // can change to "coast"
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
     public static final int kDrivingMotorCurrentLimit = 40; // amps
@@ -115,4 +116,56 @@ public final class Constants {
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
   }
+  public static final class OIConstants {
+    public static final int kDriverControllerPort = 0;
+    public static final int kManipControllerPort = 1;
+    public static final double kDriveDeadband = 0.08;
+  }
+  public static final class AutonConstants {
+    public static final double DISTANCE_FROM_START_OF_CHARGING_STATION_TO_DOCKED_AT_CHARGING_STATION = 10; // todo put proper value
+    public static final double DISTANCE_FROM_DOCK_TO_OUTSIDE_COMMUNITY = 100; // todo put proper value
+
+  }
+  public static final class AutoConstants {
+		public static final double MAX_SPEED_METERS_PER_SECOND = 3.0; //4.42; //3.0;
+		public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
+		public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = Math.PI;
+		public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = Math.PI;
+
+		public static final double X_CONTROLLER_P = 1;
+		public static final double Y_CONTROLLER_P = 1;
+		public static final double THETA_CONTROLLER_P = 1;
+
+		// Constraint for the motion profiled robot angle controller
+		public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints(
+			MAX_ANGULAR_SPEED_RADIANS_PER_SECOND, MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);
+	}
+  public static final class DrivetrainConstants {
+		// Driving Parameters - Note that these are not the maximum capable speeds of
+		// the robot, rather the allowed maximum speeds
+		public static final double MAX_SPEED_METERS_PER_SECOND = 4.0; //4.42; //4.8;
+		public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2 * Math.PI; // radians per second
+
+		public static final double DIRECTION_SLEW_RATE = 1.2; // radians per second
+		public static final double MAGNITUDE_SLEW_RATE = 1.8; // 2.0; //1.8; // percent per second (1 = 100%)
+		public static final double ROTATIONAL_SLEW_RATE = 2.0; // 20.0; //2.0; // percent per second (1 = 100%)
+
+		// Chassis configuration
+		public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(21.75);
+		
+		// Distance between centers of right and left wheels on robot
+		public static final double WHEEL_BASE_METERS = Units.inchesToMeters(21.75);
+		
+		// Distance between front and back wheels on robot
+		public static final SwerveDriveKinematics DRIVE_KINEMATICS = new SwerveDriveKinematics(
+				new Translation2d(WHEEL_BASE_METERS / 2, TRACK_WIDTH_METERS / 2),
+				new Translation2d(WHEEL_BASE_METERS / 2, -TRACK_WIDTH_METERS / 2),
+				new Translation2d(-WHEEL_BASE_METERS / 2, TRACK_WIDTH_METERS / 2),
+				new Translation2d(-WHEEL_BASE_METERS / 2, -TRACK_WIDTH_METERS / 2));
+
+		public static final boolean kGyroReversed = false;
+	}
+  
+
+  
 }

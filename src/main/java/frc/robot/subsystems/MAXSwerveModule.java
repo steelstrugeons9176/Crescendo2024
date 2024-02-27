@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.CANSparkMax;
@@ -31,7 +30,7 @@ public class MAXSwerveModule extends SubsystemBase {
   private final SparkPIDController m_drivingPIDController;
   private final SparkPIDController m_turningPIDController;
 
-  private final double driverNum;
+  // private final double driverNum;
 
   private double m_chassisAngularOffset = 0;
   private SwerveModuleState m_desiredState = new SwerveModuleState(0.0, new Rotation2d());
@@ -45,7 +44,7 @@ public class MAXSwerveModule extends SubsystemBase {
   public MAXSwerveModule(int drivingCANId, int turningCANId, double chassisAngularOffset) {
     m_drivingSparkMax = new CANSparkMax(drivingCANId, MotorType.kBrushless);
     m_turningSparkMax = new CANSparkMax(turningCANId, MotorType.kBrushless);
-    driverNum = drivingCANId;
+    // driverNum = drivingCANId;
 
     // Factory reset, so we get the SPARKS MAX to a known state before configuring
     // them. This is useful in case a SPARK MAX is swapped out.
@@ -106,6 +105,7 @@ public class MAXSwerveModule extends SubsystemBase {
     m_turningSparkMax.setIdleMode(ModuleConstants.kTurningMotorIdleMode);
     m_drivingSparkMax.setSmartCurrentLimit(ModuleConstants.kDrivingMotorCurrentLimit);
     m_turningSparkMax.setSmartCurrentLimit(ModuleConstants.kTurningMotorCurrentLimit);
+    
 
     // Save the SPARK MAX configurations. If a SPARK MAX browns out during
     // operation, it will maintain the above configurations.
@@ -119,8 +119,8 @@ public class MAXSwerveModule extends SubsystemBase {
 
   @Override
   public void periodic() {
-    String dNum = Double.toString(driverNum); 
-    SmartDashboard.putNumber(dNum, m_turningEncoder.getPosition());
+    // String dNum = Double.toString(driverNum); 
+    //SmartDashboard.putNumber(dNum, m_turningEncoder.getPosition());
   }
 
   /**

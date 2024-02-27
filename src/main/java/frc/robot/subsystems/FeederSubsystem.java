@@ -7,7 +7,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class FeederSubsystem extends SubsystemBase {
-    private final CANSparkMax m_feeder = new CANSparkMax (2, MotorType.kBrushless);
+    private final CANSparkMax m_feeder = new CANSparkMax (3, MotorType.kBrushless);
     public FeederSubsystem () {
         m_feeder.setInverted(true);
         m_feeder.setIdleMode(IdleMode.kBrake);
