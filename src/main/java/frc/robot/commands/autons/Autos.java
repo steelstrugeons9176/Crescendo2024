@@ -4,6 +4,7 @@
 
 package frc.robot.commands.autons;
 
+import frc.robot.RobotContainer;
 import frc.robot.commands.subsystems.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -15,8 +16,8 @@ public final class Autos {
   public static Command exampleAuto(ExampleSubsystem subsystem) {
     return Commands.sequence(subsystem.exampleMethodCommand(), new ExampleCommand(subsystem));
   }
- public static Command oneNoteShot(OneNoteShot subsystem, DriveSubsystem m_robotDrive) throws InterruptedException {
-    return Commands.sequence(new OneNoteShot(m_robotDrive));
+ public static Command oneNoteShot(OneNoteShot subsystem) throws InterruptedException {
+    return Commands.sequence(subsystem);
   }
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");

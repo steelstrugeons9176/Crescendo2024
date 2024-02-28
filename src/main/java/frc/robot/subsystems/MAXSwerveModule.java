@@ -21,6 +21,8 @@ import com.revrobotics.RelativeEncoder;
 import frc.robot.Constants.ModuleConstants;
 
 public class MAXSwerveModule extends SubsystemBase {
+  private SwerveModuleState currentState = new SwerveModuleState();
+  private SwerveModulePosition currentPosition = new SwerveModulePosition();
   private final CANSparkMax m_drivingSparkMax;
   private final CANSparkMax m_turningSparkMax;
 
@@ -121,6 +123,13 @@ public class MAXSwerveModule extends SubsystemBase {
   public void periodic() {
     // String dNum = Double.toString(driverNum); 
     //SmartDashboard.putNumber(dNum, m_turningEncoder.getPosition());
+  }
+  
+  public void setTargetState(SwerveModuleState targetState) {
+    // Optimize the state
+    currentState = SwerveModuleState.optimize(targetState, currentState.angle);
+
+    currentPosition = new SwerveModulePosition(currentPosition.distanceMeters + (currentState.speedMetersPerSecond * 0.02), currentState.angle);
   }
 
   /**

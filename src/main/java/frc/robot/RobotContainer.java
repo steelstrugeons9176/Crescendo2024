@@ -17,6 +17,9 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -95,7 +98,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() throws InterruptedException {
     // An example command will be run in autonomous
-    return Autos.oneNoteShot(new OneNoteShot(m_robotDrive), m_robotDrive);
+    // return Autos.oneNoteShot(new OneNoteShot(m_robotDrive, this));
+    return new PathPlannerAuto("Example Auto");
   }
   public TrajectoryConfig createTrajectoryConfig() {
 		// Create config for trajectory

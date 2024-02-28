@@ -3,9 +3,12 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import java.util.function.Supplier;
+
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
@@ -21,6 +24,7 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
+    public static final Supplier<ChassisSpeeds> kChassisSpeed = (Supplier<ChassisSpeeds>) new ChassisSpeeds(0.5, 0, 0);
     public static final double kMaxSpeedMetersPerSecond = 4.8;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
@@ -122,8 +126,8 @@ public final class Constants {
     public static final double kDriveDeadband = 0.08;
   }
   public static final class AutonConstants {
-    public static final double DISTANCE_FROM_START_OF_CHARGING_STATION_TO_DOCKED_AT_CHARGING_STATION = 10; // todo put proper value
-    public static final double DISTANCE_FROM_DOCK_TO_OUTSIDE_COMMUNITY = 100; // todo put proper value
+    public static final double DISTANCE_FROM_START_OF_SPEAKER_TO_STAGE = 10; // todo put proper value
+    public static final double DISTANCE_FROM_SPEAKER_TO_OUTSIDE_COMMUNITY = 100; // todo put proper value
 
   }
   public static final class AutoConstants {

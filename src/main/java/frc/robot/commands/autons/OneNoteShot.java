@@ -6,6 +6,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
@@ -20,17 +21,22 @@ import edu.wpi.first.math.util.Units;
 import frc.robot.Constants.AutonConstants;
 
 public class OneNoteShot extends SequentialCommandGroup{
-    public OneNoteShot(DriveSubsystem m_robotDrive) {
+    public OneNoteShot(DriveSubsystem m_robotDrive, RobotContainer container) {
+
+					Trajectory trajectory = createStraightForwardTrajectory(container);
                     addCommands(
+						new InstantCommand(() -> m_robotDrive.resetOdometry(trajectory.getInitialPose())),
+						
+						new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, false, false))
                        // new DriveForTime(m_robotDrive, 0.5, 0, 0,0.42),
                        // new WaitCommand(0.1),
-                        new DriveForTime(m_robotDrive, -1, 0, 0,.10)
+                        // new DriveForTime(m_robotDrive, -1, 0, 0,.10)
                        // new WaitCommand(0.1),
                        // new DriveForTime(m_robotDrive, 0.5, 0, 0,0.42)
                         
                 
                     
-            );
+           );
 
         /**
          * If intake is South:
@@ -52,8 +58,8 @@ public class OneNoteShot extends SequentialCommandGroup{
 			List.of(new Translation2d(1, 1)),
 			// End straight ahead of where we started, facing forward
 			new Pose2d(Units.inchesToMeters(
-                AutonConstants.DISTANCE_FROM_START_OF_CHARGING_STATION_TO_DOCKED_AT_CHARGING_STATION + 
-                AutonConstants.DISTANCE_FROM_DOCK_TO_OUTSIDE_COMMUNITY), 0, Rotation2d.fromDegrees(0)),
+                AutonConstants.DISTANCE_FROM_START_OF_SPEAKER_TO_STAGE + 
+                AutonConstants.DISTANCE_FROM_SPEAKER_TO_OUTSIDE_COMMUNITY), 0, Rotation2d.fromDegrees(0)),
 			container.createReverseTrajectoryConfig());
 
 		return trajectory;
